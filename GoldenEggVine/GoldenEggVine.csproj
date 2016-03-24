@@ -1,0 +1,335 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C013435B-AD71-4DF6-ABA4-32394E5239EA}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GoldenEggVine</RootNamespace>
+    <AssemblyName>Golden EggVine</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>b7a6cb1c</NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WeifenLuo.WinFormsUI.Docking">
+      <HintPath>..\packages\DockPanelSuite.2.9.0.0\lib\net40\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Actions\CCreateEntityAction.cs" />
+    <Compile Include="Actions\CDeleteEntityAction.cs" />
+    <Compile Include="Actions\CEditHeaderAction.cs" />
+    <Compile Include="Actions\CMoveEntityAction.cs" />
+    <Compile Include="Forms\HeaderEditor\SharedMusic\SharedMusic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HeaderEditor\SharedMusic\SharedMusic.Designer.cs">
+      <DependentUpon>SharedMusic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Project\NewProjectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Project\NewProjectForm.Designer.cs">
+      <DependentUpon>NewProjectForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Testing\SetupEmulatorPathForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Testing\SetupEmulatorPathForm.Designer.cs">
+      <DependentUpon>SetupEmulatorPathForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ROMRelated\CProject.cs" />
+    <Compile Include="ROMRelated\LevelRelated\LevelEntities\CLevelLevelScreenExit.cs" />
+    <Compile Include="Forms\HeaderEditor\SharedSpriteTileset\SharedSpriteTileset.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HeaderEditor\SharedSpriteTileset\SharedSpriteTileset.Designer.cs">
+      <DependentUpon>SharedSpriteTileset.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\HeaderEditor\SpriteTilesetEditor\SpriteTilesetEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HeaderEditor\SpriteTilesetEditor\SpriteTilesetEditor.Designer.cs">
+      <DependentUpon>SpriteTilesetEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LevelStatistics\LevelStatistics.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LevelStatistics\LevelStatistics.Designer.cs">
+      <DependentUpon>LevelStatistics.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\CByteStream.cs" />
+    <Compile Include="Helpers\CBitManipulator.cs" />
+    <Compile Include="ROMRelated\LevelRelated\LevelEntities\CLevelMinibattleScreenExit.cs" />
+    <Compile Include="ROMRelated\TranslevelRelated\CTranslevelAssociations.cs" />
+    <Compile Include="ROMRelated\GraphicsRelated\CLC_LZ2.cs" />
+    <Compile Include="ROMRelated\GraphicsRelated\LZCommands\CByteFillCommand.cs" />
+    <Compile Include="ROMRelated\GraphicsRelated\LZCommands\CLongLengthCommand.cs" />
+    <Compile Include="ROMRelated\GraphicsRelated\LZCommands\CLZCommand.cs" />
+    <Compile Include="ROMRelated\GraphicsRelated\LZCommands\CCopyCommand.cs" />
+    <Compile Include="ROMRelated\GraphicsRelated\LZCommands\CIncreasingFillCommand.cs" />
+    <Compile Include="ROMRelated\GraphicsRelated\LZCommands\CStopCommand.cs" />
+    <Compile Include="ROMRelated\GraphicsRelated\LZCommands\CRepeatCommand.cs" />
+    <Compile Include="ROMRelated\GraphicsRelated\LZCommands\CWordFillCommand.cs" />
+    <Compile Include="ROMRelated\TranslevelRelated\CEntranceData.cs" />
+    <Compile Include="Forms\EditorRelated\CGlobalDrawing.cs" />
+    <Compile Include="Forms\EditorRelated\CGlobalSettings.cs" />
+    <Compile Include="ROMRelated\TranslevelRelated\CMidwayData.cs" />
+    <Compile Include="IUpdatable.cs" />
+    <Compile Include="Labels\CBG1PalLabels.cs" />
+    <Compile Include="Labels\CBG2PalLabels.cs" />
+    <Compile Include="Labels\CBG2TSLabels.cs" />
+    <Compile Include="Labels\CBG1TSLabels.cs" />
+    <Compile Include="Labels\CBG3PalLabels.cs" />
+    <Compile Include="Labels\CBG3TSLabels.cs" />
+    <Compile Include="Labels\CLabels.cs" />
+    <Compile Include="Labels\CLevelModeLabels.cs" />
+    <Compile Include="Labels\CMiniBattleLabels.cs" />
+    <Compile Include="Labels\CMusicLabels.cs" />
+    <Compile Include="Labels\CExitLabels.cs" />
+    <Compile Include="Labels\CSpritePalLabels.cs" />
+    <Compile Include="ROMRelated\LevelRelated\LevelEntities\CLevelEntity.cs" />
+    <Compile Include="ROMRelated\LevelRelated\LevelEntities\CLevelExtendedObject.cs" />
+    <Compile Include="ROMRelated\LevelRelated\CLevelHeader.cs" />
+    <Compile Include="ROMRelated\LevelRelated\LevelEntities\CLevelObject.cs" />
+    <Compile Include="ROMRelated\LevelRelated\LevelEntities\CLevelOneDimensionalObject.cs" />
+    <Compile Include="ROMRelated\LevelRelated\LevelEntities\CLevelScreenExit.cs" />
+    <Compile Include="ROMRelated\LevelRelated\LevelEntities\CLevelTwoDimensionalObject.cs" />
+    <Compile Include="ROMRelated\LevelRelated\LevelEntities\CLevelSprite.cs" />
+    <Compile Include="Forms\EditorRelated\CEventHistory.cs" />
+    <Compile Include="Exceptions\Exceptions.cs" />
+    <Compile Include="Forms\GoldenEggVine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GoldenEggVine.Designer.cs">
+      <DependentUpon>GoldenEggVine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ROMRelated\LevelRelated\CLevelData.cs" />
+    <Compile Include="Forms\HeaderEditor\HeaderEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HeaderEditor\HeaderEditor.Designer.cs">
+      <DependentUpon>HeaderEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LevelEditor\LevelEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LevelEditor\LevelEditor.Designer.cs">
+      <DependentUpon>LevelEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Labels\CLevelLabels.cs" />
+    <Compile Include="Forms\LevelSelector\LevelSelector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LevelSelector\LevelSelector.Designer.cs">
+      <DependentUpon>LevelSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Labels\CLineProcessor.cs" />
+    <Compile Include="Forms\EditorRelated\CLoadedContent.cs" />
+    <Compile Include="Forms\EditorRelated\NoFlickerPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Actions\CAction.cs" />
+    <Compile Include="Forms\ObjectSpriteSelector\ObjectSpriteSelector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ObjectSpriteSelector\ObjectSpriteSelector.Designer.cs">
+      <DependentUpon>ObjectSpriteSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PaletteEditor\PaletteEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PaletteEditor\PaletteEditor.Designer.cs">
+      <DependentUpon>PaletteEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Forms\ScreenExitEditor\ScreenExitEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ScreenExitEditor\ScreenExitEditor.Designer.cs">
+      <DependentUpon>ScreenExitEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SettingsPreferences\SettingsPreferences.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SettingsPreferences\SettingsPreferences.Designer.cs">
+      <DependentUpon>SettingsPreferences.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\CSubArray.cs" />
+    <Compile Include="ROMRelated\CYIROM.cs" />
+    <Compile Include="ROMRelated\TranslevelRelated\CTranslevelLevelConnection.cs" />
+    <EmbeddedResource Include="Forms\GoldenEggVine.resx">
+      <DependentUpon>GoldenEggVine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HeaderEditor\HeaderEditor.resx">
+      <DependentUpon>HeaderEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HeaderEditor\SharedMusic\SharedMusic.resx">
+      <DependentUpon>SharedMusic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HeaderEditor\SharedSpriteTileset\SharedSpriteTileset.resx">
+      <DependentUpon>SharedSpriteTileset.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LevelEditor\LevelEditor.resx">
+      <DependentUpon>LevelEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LevelSelector\LevelSelector.resx">
+      <DependentUpon>LevelSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ObjectSpriteSelector\ObjectSpriteSelector.resx">
+      <DependentUpon>ObjectSpriteSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Project\NewProjectForm.resx">
+      <DependentUpon>NewProjectForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Testing\SetupEmulatorPathForm.resx">
+      <DependentUpon>SetupEmulatorPathForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Forms\ScreenExitEditor\ScreenExitEditor.resx">
+      <DependentUpon>ScreenExitEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SettingsPreferences\SettingsPreferences.resx">
+      <DependentUpon>SettingsPreferences.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FodyWeavers.xml" />
+    <Content Include="Ideen.txt" />
+    <Content Include="license.txt" />
+    <None Include="Resources\LevelModeList.txt" />
+    <None Include="Resources\SprPalList.txt" />
+    <None Include="Resources\BG3PalList.txt" />
+    <None Include="Resources\BG2PalList.txt" />
+    <None Include="Resources\BG1PalList.txt" />
+    <None Include="Resources\MiniBattleList.txt" />
+    <None Include="Resources\ExitList.txt" />
+    <None Include="Resources\MusicList.txt" />
+    <None Include="Resources\BG3TSList.txt" />
+    <None Include="Resources\BG2TSList.txt" />
+    <None Include="Resources\BG1TSList.txt" />
+    <None Include="Resources\LevelList.txt" />
+    <None Include="Resources\LevelList.dat" />
+    <None Include="Resources\Undo.ico" />
+    <None Include="Resources\SpriteEdit.ico" />
+    <None Include="Resources\ScreenExitEdit.ico" />
+    <None Include="Resources\Redo.ico" />
+    <None Include="Resources\PaletteEdit.ico" />
+    <None Include="Resources\ObjectEdit.ico" />
+    <None Include="Resources\MiniMap.ico" />
+    <None Include="Resources\LevelSave.ico" />
+    <None Include="Resources\LevelPick.ico" />
+    <None Include="Resources\LevelMultiSave.ico" />
+    <None Include="Resources\HeaderEdit.ico" />
+    <None Include="Resources\EntitySelect.ico" />
+    <None Include="Resources\shell32.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 und x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Fody.1.28.3\build\Fody.targets" Condition="Exists('..\packages\Fody.1.28.3\build\Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Dieses Projekt verweist auf mindestens ein NuGet-Paket, das auf diesem Computer fehlt. Aktivieren Sie die Wiederherstellung von NuGet-Paketen, um die fehlende Datei herunterzuladen. Weitere Informationen finden Sie unter "http://go.microsoft.com/fwlink/?LinkID=322105". Die fehlende Datei ist "{0}".</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Fody.1.28.3\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.28.3\build\Fody.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

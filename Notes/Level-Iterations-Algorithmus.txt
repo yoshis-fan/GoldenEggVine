@@ -1,0 +1,72 @@
+Level       HAT_VIELE   Translevels
+Translevel  HAT_VIELE   Levels
+
+
+Schlussfolgerung Level => Translevels ist nicht möglich
+Schlussfolgerung Translevel => Levels ist sehr wohl möglich
+Beide Zuordnungen werden gesucht, die Zuordnung Level => Translevels wird häufiger gebraucht
+=> Ist einmal die Liste Translevel => Levels erstellt worden ist auch möglich Level => Translevels
+
+
+Verfahren:
+
+\\
+ \\
+  \\
+  // Eindeutiger Screen in der ROM
+ //
+//
+struct ScreenOfLevel
+	int level
+	SVector position
+
+	operator==(a, b)
+		return a.level == b.level && a.position == b.position
+
+
+\\
+ \\ Aktualisierung bei Änderung eines Eingangs, eines Sternenkreises oder Screen Exit
+  \\
+  //
+ // Gibt alle Levels zurück, die einem Translevel zuzuordnen sind
+//
+def ConnectedLevels(translevel)
+	List<Screen> visited						//Führe Buch über besuchte Level
+	SubScreens(translevel, visited, EntranceScreen(translevel))	//Erhalte vom Eingangsscreen aus rekursiv alle anliegenden Screens
+	return FilterLevels(visited)					//Filtere aus allen Screens, die diesem Translevel zuzuordnen sind, die Levels heraus
+
+\\
+ \\
+  \\
+  // Fügt zur Liste alle vom momentanen Screen erreichbaren Screens hinzu
+ //
+//
+def SubLevels(visited, current)
+	visited.Add(current)						//Momentanen Screen zu besuchten hinzufügen (Aufruf der Methode impliziert, dass dieser Screen bisher nicht überprüft wurde)
+	if(CanWarpFrom(current))					//Tested, ob der Screen ein Screen Exit enthält und ein Warp-Objekt/Sprite
+		if(visited !includes(ScreenExitDestinationOf(current)))		//Wenn gewarpt werden kann und der Destination-Screen bisher nicht besucht wurde
+			SubLevels(visited, ScreenExitDestinationOf(current))		//Rufe Methode rekursiv für Destination-Screen auf
+	if(ContainsMiddleRing(current))					//Testet, ob der Screen einen Sternenkreis enthält
+		if(visited !includes(MidwayOf(translevel, itemmemory))		//Falls der Screen, in dem neu gestart wird bisher nicht besucht wurde
+			SubLevels(visited, MidwayOf)					//Rufe Methode rekursiv für Sternenkreis-Start-Screen auf
+	if(visited !Includes(ScreenRightFrom(current)) && IsAccessible(ScreenRightFrom(current)))	//Testet, ob Screen rechts vom momentanen unbesucht & erreichbar ist
+		SubLevels(visited, ScreenRightFrom(current))							//Rufe Methode rekursiv für Screen rechts vom momentanen Screen auf
+	if(visited !Includes(ScreenLeftFrom(current)) && IsAccessible(ScreenRightFrom(current)))	//Testet, ob Screen links vom momentanen unbesucht & erreichbar ist
+		SubLevels(visited, ScreenLeftFrom(current))							//Rufe Methode Rekursiv für Screen links vom momentanen Screen auf
+	if(visited !Includes(ScreenAbove(current)) && IsAccessible(ScreenRightFrom(current)))		//Testet, ob Screen über dem momentanen Screen unbesucht & erreichbar ist
+		SubLevels(visited, ScreenAbove(current))							//Rufe Methode rekursiv für Screen über dem momentanen Screen auf
+	if(visited !Includes(ScreenBelow(current)) && IsAccessible(ScreenRightFrom(current)))		//Testet, ob Screen unter dem momentanen Screen unbesucht & erreichbar ist
+		SubLevels(visited, ScreenBelow(current))							//Rufe Methode rekursiv für Screen unter dem momentanen Screen auf
+
+\\
+ \\
+  \\
+  // Erhält für Liste von besuchten Screens alle Levels, zu denen die Screens gehören
+ // 
+//
+def FilterLevels(visited)
+	List<int> levels
+	foreach s in visited
+		if(levels !Includes(s.level))
+			levels.Add(s.level)
+	return levels

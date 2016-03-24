@@ -17,6 +17,15 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# User specific Files
+*.suo
+
+# Unimportant Folders
+.vs/
+GoldenEggVine/bin/
+GoldenEggVine/obj/
+
+
 # =========================
 # Operating System Files
 # =========================

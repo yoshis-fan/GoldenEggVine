@@ -1,0 +1,32 @@
+x		0x00-0x19 (Invalid)
+
+0xC6800		0x1A
+...
+0xDC400		0x71
+
+
+x		0x72-0xA8 (Invalid)
+
+
+0x10F600	0xA9
+...
+0x111200	0xB0
+
+
+x		0xB1-0xFF (Invalid)
+
+
+
+
+
+
+
+0x37B1F		GFX Files Table (3-Bytes/Pointer)
+Compressed: Uncompressed, LC_Lz1, LC_LZ16
+
+
+
+Layer2 X {<0 => glitches, >=0 => percent applicable}
+Layer2 Y {<0 => constant, repeated every 4 screens, 0 => gone, >0 => percent applicable}
+Layer3 X {<0 => glitches, >=0 => percent applicable}
+Layer3 Y {<0 => constant, repeated every 2 screens, 0 => gone, >0 => percent applicable}

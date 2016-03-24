@@ -1,0 +1,76 @@
+﻿HINTERGRUND:
+	Gehe alle Eingänge durch und erhalte Listen von Levels für jedes Translevel (Gehe rekursiv durch Level und durchforste ScreenExits, Sternenkreise & Bowsers 4-Türen-Roulette, falls vorhanden)
+	Benutze DAT-Files von EggVine für eigenes Rendering (für Blöcke vorerst Größe, Skalierbarkeit, Beschreibung etc); benutze keine externen Files, halte alles in einer Config; mache einfach editierbar
+	Objekte anfassbar machen mit Anfasser als Orientierung
+	Alle LevelDaten beim Öffnen der ROM laden, erstelle List<byte>[0x48] _roomchains und List<byte>[0xDE] _fromtranslevel
+	Translevel-abhängige Eigenschaften laden (Textboxen, Eingänge, Sternenkreise, Tap-Tap, Welt 6, (Patches)
+	Klassen von Eingängen/Sternenkreisen; Überschneidungen, Jump-To
+	Hack versiegeln, Levelpointertabelle verschieben, alten Ort mit FF überschreiben; nach Mgl. Objekt&Sprite-Pointer zufällig neu anordnen
+	Erkennung versiegelter Hacks (alle Bytes in Levelpointertabelle sind FF)
+	
+	EVTL: Dynamisches Entwickeln (Ordner mit Leveldateien, Entwicklung an einer leeren ROM)
+
+EDITOR:
+	View-Optionen: Blockansicht, Grafikansicht
+	Grafik-Support für Hintergrund & Layer1 (Layer2, Layer3)
+	Angabe eines Emulators zum Spielen
+	Hover für Textboxen > Text ändern
+	Goto-Option per Hotkey für ScreenExits ("J" während die Maus im Bildschirm ist; öffnet neuen Tab mit Level/springt zum geöffneten Tab an die richtige Position)
+	Erstellung/Löschen von ScreenExits per Hotkey ("E" in dem Bildschirm, wo man ihn haben/löschen will; Klick öffnet ScreenExit-Editor, kann beim Erstellen automatisch geöffnet werden (SETTINGS))
+	Speichern mittels Strg+S
+	Zoom +/-, TileGrid, ScreenGrid, CheckeredBG, Bereich außerhalb des Levels
+	ObjectEdit/SpriteEdit(/beides)
+	Massenauswahl von Objekten
+	Erstellen(AddToList)[G] per Drag & Drop, Löschen(Exists = False)[Entf], Bewegen(SetPosition)[Klicken und Ziehen], Priorisieren(RemoveFromList=>AddToList)[Q/W], Kopieren(Foreach(Gewählt(Objekt)) Erstellen)[C, V](Levelübergreifend (SETTINGS)) von Objekten (ERFORDERT STETS INVALIDATION)
+	Minimap zum Klicken
+	Byte-Zähler, Byte-Statistik (Anteil an verbrauchtem Platz) => Frage, ob man den Level reallokieren will beim Speichern, falls zu viel Platz verbraucht wurde
+	Benutzbare Screens-Zähler
+	Warnung vor dem Speichern bei außerhalb des Levels liegenden Objekten
+	ActionList für Liste von rückgängigmachbaren Aktionen => Undo[Z]/Redo[Y]
+	Größe des gewählten Objekts anzeigen
+	Beim Öffnen zum ersten Objekt springen (SETTINGS)
+	Prüfsummenkorrektur
+
+PATCHING:
+	Ski-Modus, Brauner Chomp, nach links schauender Yoshi, Welt6-Tileset
+
+LAYER-2-HINTERGRUND-EDITOR:
+	Editor für Hintergrundbilder, Tilemaps aus GFX-Datei laden
+
+LAYER-3-HINTERGRUND-EDITOR:
+	Editor für Layer3-Effekte, Tilemaps aus GFX-Datei laden
+
+SPRITE-TILESET-EDITOR:
+	Editor für Sprite Tilesets (Kipernals Tool integrieren im Groben...)
+
+TEXT-EDITOR:
+	Editor für Text von Kamek-Sequenzen & Textboxen (Kamek bei Tap-Tap muss erkannt werden!!!)
+	Editor für Levelnamen anhand der ermittelten Translevel-Nummern
+	Möglichkeiten für Textformatierung(Größe) & Bilder
+	Reallokation bei zu großen Texten
+
+SCHRIFT-EDITOR:
+	Editor, der wie YY-CHR funktioniert, nur für 1BPP, zum Ändern der Schrift
+
+EINGANGS-EDITOR:
+	Editor für Leveleingänge, Eingänge werden geladen; führt einer in geöffneten Level, zeige an und mache veränderbar (Drag & Drop)
+	Springe zu gewähltem Eingang
+
+STERNENKREIS-EDITOR:
+	Editor für Sternenkreis-Eingänge beim Sternenkreis des jeweiligen Levels (Sternenkreiseingangs-Verschiebung per Drag & Drop)
+	Springe zu gewähltem Eingang
+
+SPRITEVIEW:
+	Anzeige von Sprites mit hardgecodeten Grafiken, mache abhängig vom Sprite Tileset, zeige Warnung bei geglitchten
+
+PROJEKTE:
+	ORDNERSTRUKTUR
+	<projektname>
+		Baserom.smc
+		emulatorpath.dat
+		Levels
+			XX.obj
+			XX.spr
+		Labels
+			MusicList.dat
+			Layer1.dat

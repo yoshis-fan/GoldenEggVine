@@ -1,0 +1,25 @@
+Here are the references to these tables in case you want to change the locations of them:
+B1F4 [E7 F3 17](BF5E7) Reference to level starting point data pointers
+B1F9 [72 F4 17](BF672) Reference to level starting point data, byte 2
+B207 [73 F4 17](BF673) Reference to level starting point data, byte 3
+B215 [71 F4 17](BF671) Reference to level starting point data, byte 1
+B28F [C3 F7 17](BF9C3) Reference to level object data, low byte
+B295 [C4 F7 17](BF9C4) Reference to level object data, middle and high bytes
+B29B [C6 F7 17](BF9C6) Reference to level sprite data, low and middle bytes
+B2A3 [C8 F7 17](BF9C8) Reference to level sprite data, high byte
+
+E86A [51 F5](BF751) Reference to level midway point data pointers
+E86E [DC F5](BF7DC) Reference to level midway point data, bytes 2 and 3?
+E877 [DB F5](BF7DB) Reference to level midway point data, byte 1
+E87E [DE F5](BF7DE) Reference to level midway point data, byte 4
+
+85C5C[E7 F3 17](BF5E7) Reference to level starting point data pointers
+85C61[71 F4 17](BF671) Reference to level starting point data, byte 1
+
+
+
+
+85C6F[C3 F7 17](BF9C3) Reference to level object data, low byte
+85C75[C4 F7 17](BF9C4) Reference to level object data, middle and high bytes
+85C7B[C6 F7 17](BF9C6) Reference to level sprite data, low and middle bytes
+85C83[C8 F7 17](BF9C8) Reference to level sprite data, high byte
