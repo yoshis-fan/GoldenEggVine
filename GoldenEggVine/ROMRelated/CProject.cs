@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Windows.Forms;
 
 namespace GoldenEggVine.ROMRelated
 {
@@ -48,7 +49,7 @@ namespace GoldenEggVine.ROMRelated
 
 		public CProject(string projectPath)
 		{
-			if (Directory.Exists(projectPath))
+			if(Directory.Exists(projectPath))
 			{
 				_projectRoot = projectPath;
 				_rom = new CYIROM(BaseRom);
@@ -61,10 +62,11 @@ namespace GoldenEggVine.ROMRelated
 
 		public void InitialSetup(string baseRomPath)
 		{
-			if (Directory.Exists(Root))
+			if(Directory.Exists(Root))
 			{
 				throw new ArgumentException("The project directory already exists, recreating everything could be harmful");
 			}
+
 			try
 			{
 				// TODO Generate project data files
@@ -81,7 +83,19 @@ namespace GoldenEggVine.ROMRelated
 				Directory.CreateDirectory(AsmFolder);
 				Directory.CreateDirectory(LabelsFolder);
 
-
+				var rom = new CYIROM(BaseRom);
+				var levelData = rom.GetAllLevelData();
+				for(int i = 0; i <= 0xDD; ++i)
+				{
+					File.WriteAllBytes(
+						Path.Combine(LevelsFolder, String.Format("{0:X2}.obj", i)),
+						rom.GetLevelBytes(rom.GetLevelSpecs(i, ELevelData.OBJECTS))
+					);
+					File.WriteAllBytes(
+						Path.Combine(LevelsFolder, String.Format("{0:X2}.spr", i)),
+						rom.GetLevelBytes(rom.GetLevelSpecs(i, ELevelData.SPRITES))
+					);
+				}
 			}
 			catch(Exception e)
 			{
