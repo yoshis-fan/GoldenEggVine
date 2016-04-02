@@ -42,22 +42,6 @@ namespace GoldenEggVine.Forms.Project
 			{
 				projectParentDirTextBox.Text = fbd.SelectedPath;
 			}
-
-			if(Directory.GetFileSystemEntries(fbd.SelectedPath).Length > 0)
-			{
-				var result = MessageBox.Show("The directory you selected is not empty. You can choose to delete its contents and create the project or choose a different directory. Do you want to choose a different directory?", "WARNING!! DANGER!!!", MessageBoxButtons.YesNo);
-				if(result == DialogResult.Yes)
-				{
-					browseProjectParentDirButton_Click(sender, e);
-				}
-				else
-				{
-					foreach(var path in Directory.GetFiles(fbd.SelectedPath))
-						File.Delete(path);
-					foreach(var path in Directory.GetDirectories(fbd.SelectedPath))
-						Directory.Delete(path, true);
-				}
-			}
 		}
 
 		private void ValidateFormData(object sender, EventArgs e)
@@ -81,6 +65,20 @@ namespace GoldenEggVine.Forms.Project
 
 		private void createProjectButton_Click(object sender, EventArgs e)
 		{
+			var targetDir = Path.Combine(projectParentDirTextBox.Text, projectNameTextBox.Text);
+			if(Directory.Exists(targetDir))
+			{
+				var result = MessageBox.Show("The directory you selected already exists. You can choose to delete it and its contents and create the project or choose a different directory. Do you want to cancel and choose a different directory?", "WARNING!! DANGER!!!", MessageBoxButtons.YesNo);
+				if(result == DialogResult.Yes)
+				{
+					return;
+				}
+				else
+				{
+					Directory.Delete(targetDir, true);
+				}
+			}
+
 			this.DialogResult = DialogResult.OK;
 			this.Close();
 		}
