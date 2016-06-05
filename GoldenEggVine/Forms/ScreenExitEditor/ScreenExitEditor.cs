@@ -15,27 +15,27 @@ using GoldenEggVine.ROMRelated.LevelRelated.LevelEntities;
 namespace GoldenEggVine.Forms
 {
 
-    public partial class ScreenExitEditor : DockContent, IUpdatable
-    {
+	public partial class ScreenExitEditor : DockContent, IUpdatable
+	{
 		private enum EScreenExitType { LEVEL, MINIBATTLE };
 
-        private Mainform _mainform;
+		private Mainform _mainform;
 		private TextBox[] _levelse;
 		private TextBox[] _minibattlese;
 
 
-        public ScreenExitEditor()
-        {
-            InitializeComponent();
+		public ScreenExitEditor()
+		{
+			InitializeComponent();
 			GroupValidatableTextBoxes();
-        }
+		}
 
-        public ScreenExitEditor(Mainform mainform) : this()
-        {
+		public ScreenExitEditor(Mainform mainform) : this()
+		{
 			_mainform = mainform;
 			RetrieveInformation();
-            ScreenIndexCB.SelectedIndex = 0;
-        }
+			ScreenIndexCB.SelectedIndex = 0;
+		}
 
 		private void GroupValidatableTextBoxes()
 		{
@@ -45,23 +45,23 @@ namespace GoldenEggVine.Forms
 
 		private void RetrieveInformation()
 		{
-            for (int i = 0; i < CYIROM.NumberOfScreensPerLevel(); i++)
-            {
-                ScreenIndexCB.Items.Add(String.Format("{0:X2}",i));
-            }
+			for (int i = 0; i < CYIROM.NumScreensPerLevel; i++)
+			{
+				ScreenIndexCB.Items.Add(String.Format("{0:X2}", i));
+			}
 
-            for (int i = 0; i < _mainform._loadedcontent._exitlist.Count(); i++)
-            {
-                ExittypeCB.Items.Add(String.Format("{0:X1}", _mainform._loadedcontent._exitlist.GetContent(i, EExitLabelsContent.INDEX)) + " - " + _mainform._loadedcontent._exitlist.GetContent(i, EExitLabelsContent.DESCRIPTION));
-            }
+			for (int i = 0; i < _mainform._loadedcontent._exitlist.Count(); i++)
+			{
+				ExittypeCB.Items.Add(String.Format("{0:X1}", _mainform._loadedcontent._exitlist.GetContent(i, EExitLabelsContent.INDEX)) + " - " + _mainform._loadedcontent._exitlist.GetContent(i, EExitLabelsContent.DESCRIPTION));
+			}
 			for (int i = 0; i < _mainform._loadedcontent._minibattlelist.Count(); i++)
 			{
 				MiniBattletypeCB.Items.Add(String.Format("{0:X1}", _mainform._loadedcontent._minibattlelist.GetContent(i, EMiniBattleLabelsContent.INDEX)) + " - " + _mainform._loadedcontent._minibattlelist.GetContent(i, EMiniBattleLabelsContent.DESCRIPTION));
 			}
 		}
 
-        public void UpdateStatus()
-        {
+		public void UpdateStatus()
+		{
 			if (_mainform._currentlevel != null)
 			{
 				this.Enabled = true;
@@ -105,7 +105,7 @@ namespace GoldenEggVine.Forms
 						ReturnLevelTB.Text = String.Format("{0:X2}", currentexit.GetDestinationLevel());
 						ReturnXTB.Text = String.Format("{0:X2}", currentexit.GetDestinationX());
 						ReturnYTB.Text = String.Format("{0:X2}", currentexit.GetDestinationY());
-						MiniBattletypeCB.SelectedIndex = (((int)((((CLevelMinibattleScreenExit)currentexit).GetMinibattle())) - CYIROM.NumberOfLevels()));
+						MiniBattletypeCB.SelectedIndex = (((int)((((CLevelMinibattleScreenExit)currentexit).GetMinibattle())) - CYIROM.NumLevelIndices));
 
 						DestLevelTB.Text = "";
 						DestXTB.Text = "";
@@ -118,59 +118,59 @@ namespace GoldenEggVine.Forms
 			{
 				this.Enabled = false;
 			}
-        }
+		}
 
-        public void JumpToScreen(SVector position)
-        {
-            if (this.IsHidden)
-            {
-                _mainform.screenExitEditorTSB.PerformClick();
-            }
-            ScreenIndexCB.SelectedIndex = position._x + (position._y << 4);
-        }
+		public void JumpToScreen(SVector position)
+		{
+			if (this.IsHidden)
+			{
+				_mainform.screenExitEditorTSB.PerformClick();
+			}
+			ScreenIndexCB.SelectedIndex = position._x + (position._y << 4);
+		}
 
-        private void ScreenExitEditor_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            e.Cancel = true;
-            _mainform.screenExitEditorTSB.PerformClick();
-        }
+		private void ScreenExitEditor_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			e.Cancel = true;
+			_mainform.screenExitEditorTSB.PerformClick();
+		}
 
-        private static void ChooseComboBoxEntryFromTextBox(TextBox tb, ComboBox cb)
-        {
-            //Transforms into upper case
-            int sel = tb.SelectionStart;
-            tb.Text = tb.Text.ToUpper();
-            tb.SelectionStart = sel;
-            int c = -1;
-            try
-            {
-                c = Int32.Parse(tb.Text, System.Globalization.NumberStyles.AllowHexSpecifier);
-            }
-            catch (Exception)
-            { }
+		private static void ChooseComboBoxEntryFromTextBox(TextBox tb, ComboBox cb)
+		{
+			//Transforms into upper case
+			int sel = tb.SelectionStart;
+			tb.Text = tb.Text.ToUpper();
+			tb.SelectionStart = sel;
+			int c = -1;
+			try
+			{
+				c = Int32.Parse(tb.Text, System.Globalization.NumberStyles.AllowHexSpecifier);
+			}
+			catch (Exception)
+			{ }
 
-            //If the number is invalid, paint it red, else black
-            if (c < 0x00 || c >= cb.Items.Count || tb.Text.Equals(""))
-            {
-                tb.ForeColor = Color.Red;
-            }
-            else
-            {
-                tb.ForeColor = Color.Black;
-                cb.SelectedIndex = c;
-            }
-        }
+			//If the number is invalid, paint it red, else black
+			if (c < 0x00 || c >= cb.Items.Count || tb.Text.Equals(""))
+			{
+				tb.ForeColor = Color.Red;
+			}
+			else
+			{
+				tb.ForeColor = Color.Black;
+				cb.SelectedIndex = c;
+			}
+		}
 
-        private void ScreenIndexTB_TextChanged(object sender, EventArgs e)
-        {
-            ChooseComboBoxEntryFromTextBox((TextBox)sender, ScreenIndexCB);
-        }
+		private void ScreenIndexTB_TextChanged(object sender, EventArgs e)
+		{
+			ChooseComboBoxEntryFromTextBox((TextBox)sender, ScreenIndexCB);
+		}
 
-        private void ScreenIndexCB_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UpdateStatus();
+		private void ScreenIndexCB_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			UpdateStatus();
 			((ComboBox)sender).Focus();
-        }
+		}
 
 		private void ApplyB_Click(object sender, EventArgs e)
 		{
@@ -256,19 +256,19 @@ namespace GoldenEggVine.Forms
 		//Hardcoded, cause fuck you!
 		private void CheckIfAllInputValid(EScreenExitType set)
 		{
-			switch(set)
+			switch (set)
 			{
-				case(EScreenExitType.LEVEL):
+				case (EScreenExitType.LEVEL):
 					ApplyB.Enabled = false;
-					if(!ValidateTextbox(DestLevelTB, CYIROM.NumberOfLevels())){ return; }
-					if(!ValidateTextbox(DestXTB, 0xFF)){ return; }
-					if(!ValidateTextbox(DestYTB, 0x7F)){ return; }
-					if (ExittypeCB.SelectedIndex < 0 || ExittypeCB.SelectedIndex >= ExittypeCB.Items.Count){ return; }
+					if (!ValidateTextbox(DestLevelTB, CYIROM.NumLevelIndices)) { return; }
+					if (!ValidateTextbox(DestXTB, 0xFF)) { return; }
+					if (!ValidateTextbox(DestYTB, 0x7F)) { return; }
+					if (ExittypeCB.SelectedIndex < 0 || ExittypeCB.SelectedIndex >= ExittypeCB.Items.Count) { return; }
 					ApplyB.Enabled = true;
 					break;
-				case(EScreenExitType.MINIBATTLE):
+				case (EScreenExitType.MINIBATTLE):
 					ApplyB.Enabled = false;
-					if (!ValidateTextbox(ReturnLevelTB, CYIROM.NumberOfLevels())){ return; }
+					if (!ValidateTextbox(ReturnLevelTB, CYIROM.NumLevelIndices)) { return; }
 					if (!ValidateTextbox(ReturnXTB, 0xFF)) { return; }
 					if (!ValidateTextbox(ReturnYTB, 0x7F)) { return; }
 					if (MiniBattletypeCB.SelectedIndex < 0 || MiniBattletypeCB.SelectedIndex >= MiniBattletypeCB.Items.Count) { return; }
@@ -281,7 +281,7 @@ namespace GoldenEggVine.Forms
 
 		private void DestLevelTB_TextChanged(object sender, EventArgs e)
 		{
-			ValidateTextbox((TextBox)sender, CYIROM.NumberOfLevels() - 1);
+			ValidateTextbox((TextBox)sender, CYIROM.NumLevelIndices - 1);
 			CheckIfAllInputValid(EScreenExitType.LEVEL);
 		}
 
@@ -299,7 +299,7 @@ namespace GoldenEggVine.Forms
 
 		private void ReturnLevelTB_TextChanged(object sender, EventArgs e)
 		{
-			ValidateTextbox((TextBox)sender, CYIROM.NumberOfLevels() - 1);
+			ValidateTextbox((TextBox)sender, CYIROM.NumLevelIndices - 1);
 			CheckIfAllInputValid(EScreenExitType.MINIBATTLE);
 		}
 
@@ -330,5 +330,5 @@ namespace GoldenEggVine.Forms
 			//Refresh afterwards
 			UpdateStatus();
 		}
-    }
+	}
 }

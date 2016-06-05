@@ -13,7 +13,7 @@ namespace GoldenEggVine.ROMRelated.TranslevelRelated
 
 		public CMidwayData(byte[] rombytes, int translevel, int midwaypointers, int midwaydata)
 		{
-			if (translevel < 0 || translevel > 0x47)
+			if (translevel < 0 || translevel >= CYIROM.NumTransLevels)
 			{
 				throw new MidwayDataAddressPointerException("Translevel Index must be between 0x00 and 0x47, but was specified as " + translevel);
 			}

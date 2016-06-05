@@ -92,7 +92,7 @@ namespace GoldenEggVine.ROMRelated.LevelRelated.LevelEntities
 
 		public static CLevelScreenExit CreateScreenExitFromData(ArraySegment<byte> screenexit)
 		{
-			if(screenexit.Array[screenexit.Offset + 1] < CYIROM.NumberOfLevels())
+			if(screenexit.Array[screenexit.Offset + 1] < CYIROM.NumLevelIndices)
 			{
 				return new CLevelLevelScreenExit(screenexit);
 			}

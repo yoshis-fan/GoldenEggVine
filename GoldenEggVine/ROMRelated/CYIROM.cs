@@ -73,6 +73,18 @@ namespace GoldenEggVine.ROMRelated
 	/// </summary>
 	public class CYIROM
 	{
+		/// <summary>
+		/// The number of available translevels (meaning translevels 0 up to this number minus 1 are valid).
+		/// </summary>
+		public const int NumTransLevels = 0x48;
+
+		/// <summary>
+		/// The number of valid level indices.
+		/// </summary>
+		public const int NumLevelIndices = 0xDE;
+
+		public const int NumScreensPerLevel = 0x10 * 0x8;
+
 		internal static byte[] headerromproperties = new byte[] { 0x15, 0x0B, 0x00, 0x01, 0x33, 0x00 };
 		internal static byte[] headerinterrupt = new byte[] { 0x4F, 0x81, 0x4F, 0x81, 0x4F, 0x81, 0x4F, 0x81, 0x4F, 0x81, 0x08, 0x01, 0x4F, 0x81, 0x0C, 0x01, 0x4F, 0x81, 0x4F, 0x81, 0x4F, 0x81, 0x4F, 0x81, 0x4F, 0x81, 0x4F, 0x81, 0x00, 0x80, 0x4F, 0x81 };
 		public byte[] rombytes;
@@ -82,9 +94,6 @@ namespace GoldenEggVine.ROMRelated
 		private static byte[] renderfour = { 0x00, 0x01, 0x41, 0x80, 0xC0, 0xFF };
 		private static byte[] renderfive = { 0x02, 0x42, 0x82, 0xC2 };
 
-		private static int numberoftranslevels = 0x48;
-		private static int numberoflevelindexes = 0xDE;
-		private static int numberofscreensperlevel = 0x10 * 0x8;
 
 
 		private static int itemsallowedoffset = 0x71C;
@@ -169,7 +178,7 @@ namespace GoldenEggVine.ROMRelated
 			CreateRenderLengthTable();
 
 			this.leveldata = new List<CLevelData>();
-			for (int i = 0; i < numberoflevelindexes; i++)
+			for (int i = 0; i < NumLevelIndices; i++)
 			{
 				try
 				{
@@ -267,7 +276,7 @@ namespace GoldenEggVine.ROMRelated
 			}
 
 			this.entrancedata = new List<CEntranceData>();
-			for (int i = 0; i < CYIROM.numberoftranslevels; i++)
+			for (int i = 0; i < CYIROM.NumTransLevels; i++)
 			{
 				this.entrancedata.Add(new CEntranceData(this.rombytes, i, this.entrancepointers, this.entrancepointerdata));
 			}
@@ -293,7 +302,7 @@ namespace GoldenEggVine.ROMRelated
 			}
 
 			this.midwaydata = new List<CMidwayData>();
-			for (int i = 0; i < CYIROM.numberoftranslevels; i++)
+			for (int i = 0; i < CYIROM.NumTransLevels; i++)
 			{
 				this.midwaydata.Add(new CMidwayData(this.rombytes, i, this.midwaypointers, this.midwaypointerdata));
 			}
@@ -321,7 +330,7 @@ namespace GoldenEggVine.ROMRelated
 		/// <returns>The Leveldata from that Levelindex</returns>
 		private CLevelData GenerateLevelData(int levelindex)
 		{
-			if (levelindex > -1 && levelindex < numberoflevelindexes)
+			if (levelindex > -1 && levelindex < NumLevelIndices)
 			{
 				return new CLevelData(new ArraySegment<byte>(rombytes, (int)LoROMPointerAddressToPCAddress(this.objectpointers + 6 * levelindex), 0), new ArraySegment<byte>(rombytes, (int)LoROMPointerAddressToPCAddress(this.spritepointers + 6 * levelindex), 0), renderlength, levelindex);
 			}
@@ -698,21 +707,6 @@ namespace GoldenEggVine.ROMRelated
 				}
 			}
 			return affected;
-		}
-
-		public static int NumberOfTransLevels()
-		{
-			return numberoftranslevels;
-		}
-
-		public static int NumberOfLevels()
-		{
-			return numberoflevelindexes;
-		}
-
-		public static int NumberOfScreensPerLevel()
-		{
-			return numberofscreensperlevel;
 		}
 	}
 }

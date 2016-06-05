@@ -79,7 +79,7 @@ namespace GoldenEggVine.Forms
             {  }
 
             //If the number is invalid, paint it red, else black
-            if(c < 0x00 || c >= GoldenEggVine.ROMRelated.CYIROM.NumberOfLevels() || this.LevelChoiceTB.Text.Equals(""))
+            if(c < 0x00 || c >= GoldenEggVine.ROMRelated.CYIROM.NumLevelIndices || this.LevelChoiceTB.Text.Equals(""))
             {
                 this.LevelChoiceTB.ForeColor = Color.Red;
                 _validtextboxinput = false;

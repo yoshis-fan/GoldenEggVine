@@ -15,7 +15,7 @@ namespace GoldenEggVine.ROMRelated.LevelRelated.LevelEntities
 
 		public CLevelLevelScreenExit(ArraySegment<byte> screenexit) : base(screenexit)
 		{
-			if(screenexit.Array[screenexit.Offset + 1] < CYIROM.NumberOfLevels())
+			if(screenexit.Array[screenexit.Offset + 1] < CYIROM.NumLevelIndices)
 			{
 				_level = screenexit.Array[screenexit.Offset + 1];
 			}

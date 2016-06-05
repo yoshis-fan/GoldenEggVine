@@ -13,7 +13,7 @@ namespace GoldenEggVine.ROMRelated.TranslevelRelated
 
 		public SLevelScreen(int levelindex, SVector position)
 		{
-			if(levelindex > -1 && levelindex < CYIROM.NumberOfLevels())
+			if(levelindex > -1 && levelindex < CYIROM.NumLevelIndices)
 			{
 				_levelindex = levelindex;
 			}

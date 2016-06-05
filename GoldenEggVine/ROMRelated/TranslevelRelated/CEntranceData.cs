@@ -13,7 +13,7 @@ namespace GoldenEggVine.ROMRelated.TranslevelRelated
 
 		public CEntranceData(byte[] rombytes, int translevel, int entrancepointers, int entrancedata)
 		{
-			if (translevel < 0 || translevel > 0x47)
+			if (translevel < 0 || translevel >= CYIROM.NumTransLevels)
 			{
 				throw new InvalidTranslevelIndexException("Translevel Index must be between 0x00 and 0x47, but was specified as " + translevel);
 			}

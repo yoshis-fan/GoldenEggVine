@@ -46,7 +46,7 @@ namespace GoldenEggVine.ROMRelated.LevelRelated.LevelEntities
 			g.DrawRectangle(CGlobalDrawing._redinnerline, (_position._x << 8) + 0x2 + (offset << 4), (_position._y << 8) + 0x2 + (offset << 4), 0xFC, 0xFC);
 
 			g.FillRectangle(CGlobalDrawing._datarect, (_position._x << 8) + 3 + (offset << 4), (_position._y << 8) + 3 + (offset << 4), 0xFA, 0xD);
-			g.DrawString("Minibattle: " + String.Format("{0:X1}", (int)(_minibattle - CYIROM.NumberOfLevels())) + "   X: " + String.Format("{0:X2}", _positionx) + "   Y: " + String.Format("{0:X2}", _positiony) + "   L: " + String.Format("{0:X2}", _returnlevel), CGlobalDrawing._font, CGlobalDrawing._fontbrush, new System.Drawing.Point((_position._x << 8) + 2 + (offset << 4), (_position._y << 8) + 3 + (offset << 4)));
+			g.DrawString("Minibattle: " + String.Format("{0:X1}", (int)(_minibattle - CYIROM.NumLevelIndices)) + "   X: " + String.Format("{0:X2}", _positionx) + "   Y: " + String.Format("{0:X2}", _positiony) + "   L: " + String.Format("{0:X2}", _returnlevel), CGlobalDrawing._font, CGlobalDrawing._fontbrush, new System.Drawing.Point((_position._x << 8) + 2 + (offset << 4), (_position._y << 8) + 3 + (offset << 4)));
 		}
 	}
 }
