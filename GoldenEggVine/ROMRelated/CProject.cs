@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Windows.Forms;
+using GoldenEggVine.ROMRelated.LevelRelated.LevelEntities;
 
 namespace GoldenEggVine.ROMRelated
 {
@@ -96,10 +97,37 @@ namespace GoldenEggVine.ROMRelated
 						rom.GetLevelBytes(rom.GetLevelSpecs(i, ELevelData.SPRITES))
 					);
 				}
+
+
+				var midwaysByTransLevel = rom.GetMidwayData().ToDictionary(x => x.TransLevel);
+				var entrancesByTransLevel = rom.GetEntranceData().ToDictionary(x => x.TransLevel);
+				for (int i = 0; i < CYIROM.NumTransLevels; ++i)
+				{
+					var entranceData = entrancesByTransLevel[i];
+					File.WriteAllBytes(
+						Path.Combine(EntrancesFolder, String.Format("{0:X2}.ent", i)),
+						entranceData.GetData()
+					);
+
+					var levels = entranceData.GetAllReachableLevels(rom);
+					var midwayData = midwaysByTransLevel[i];
+
+					using (BinaryWriter binWriter = new BinaryWriter(
+						File.OpenWrite(Path.Combine(MidringsFolder, String.Format("{0:X2}.mwd", i)))
+					))
+					{
+						for (int j = 0; j < 4; ++j)
+						{
+							if (levels.Contains(midwayData.GetLevel(j)))
+								binWriter.Write(midwayData.GetData(j));
+						}
+						binWriter.Close();
+					}
+				}
 			}
 			catch(Exception e)
 			{
-				// TODO Sensible catch
+				// TODO Sensible catch (note we may be mid-creation here and thus have created/deleted some stuff already and may want to undo things in a reasonable way)
 				System.Windows.Forms.MessageBox.Show(e.ToString());
 			}
 

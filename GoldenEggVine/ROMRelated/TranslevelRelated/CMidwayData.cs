@@ -11,11 +11,13 @@ namespace GoldenEggVine.ROMRelated.TranslevelRelated
 		private int _translevel;
 		private ArraySegment<byte>[] _midways = new ArraySegment<byte>[4];
 
+		public int TransLevel => _translevel;
+
 		public CMidwayData(byte[] rombytes, int translevel, int midwaypointers, int midwaydata)
 		{
 			if (translevel < 0 || translevel >= CYIROM.NumTransLevels)
 			{
-				throw new MidwayDataAddressPointerException("Translevel Index must be between 0x00 and 0x47, but was specified as " + translevel);
+				throw new InvalidTranslevelIndexException("Translevel Index must be between 0x00 and 0x47, but was specified as " + translevel);
 			}
 			_translevel = translevel;
 
@@ -59,6 +61,13 @@ namespace GoldenEggVine.ROMRelated.TranslevelRelated
 				throw new InvalidItemMemoryIndexException("Item Memory Index must be between 0x0 and 0x3, but was specified as " + itemmemory);
 			}
 			return _midways[itemmemory].Array[_midways[itemmemory].Offset + 3];
+		}
+
+		public byte[] GetData(int itemmemory)
+		{
+			byte[] target = new byte[4];
+			Array.Copy(_midways[itemmemory].Array, _midways[itemmemory].Offset, target, 0, 4);
+			return target;
 		}
 	}
 }
